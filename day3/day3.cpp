@@ -4,16 +4,9 @@ using namespace std;
 
 #define SIZE_FIELD 12
 
-int updateOccurencesOfOne(int bitfield, char bit) {
-	if (bit - '0' == 1) return (bitfield+1);
-	return bitfield;
-}
-
 int main(int argc, char* argv[]) {
 	string line;
 	int nlines = 0;
-	int position = 0;
-	int depth = 0;
 	int bitfield[SIZE_FIELD];
 	unsigned int rateGamma = 0;
 	unsigned int rateEpsilon = 0;
@@ -31,12 +24,10 @@ int main(int argc, char* argv[]) {
 	ifstream fin(argv[1]);
 	if (fin.is_open()) {
 
-		// read rest of file to get occurences of depth increase
+		// read file and count number of occurences of 1s in each line
 		while (getline(fin, line)) {
-			for (int i = 0; i < SIZE_FIELD; i++) {
-				bitfield[i] = updateOccurencesOfOne(bitfield[i], line[i]);
-			}
-
+			for (int i = 0; i < SIZE_FIELD; i++)
+				if (line[i] - '0' == 1) bitfield[i]++;
 			nlines++;
 		}
 		fin.close();
@@ -44,7 +35,7 @@ int main(int argc, char* argv[]) {
 		cerr << argv[0] << ": unable to read file.\n";
 		exit(1);
 	}
-	
+
 	// calculate bits in bitfield to form integer for rates
 	for (int i = 0; i < SIZE_FIELD; i++) {
 		// get most/least common bit
