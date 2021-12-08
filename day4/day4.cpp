@@ -16,8 +16,6 @@ int main(int argc, char* argv[]) {
 	string line;
 	int h, i, j;
 	int nlines = 0;
-	int position = 0;
-	int depth = 0;
 	char* tok;
 	BingoEntry be[BOARDSIZE][LEN][LEN];
 	vector<int> numsCalled;
@@ -77,7 +75,7 @@ int main(int argc, char* argv[]) {
 	// let's play bingo
 	for (int num : numsCalled) {
 		// check each board starting with the first
-		for (h = 0; h<BOARDSIZE; h++) {
+		for (h=0; h<BOARDSIZE; h++) {
 			// scan through board to find matching num
 			for (i=0; i<LEN; i++) {
 				for (j=0; j<LEN; j++) {
@@ -114,8 +112,8 @@ int main(int argc, char* argv[]) {
 
 	// get sum of unmarked entries in board
 	int sum = 0;
-	for (i = 0; i < LEN; i++) {
-		for (j = 0; j < LEN; j++) {
+	for (i=0; i < LEN; i++) {
+		for (j=0; j < LEN; j++) {
 			if (!be[h][i][j].isMarked) sum += be[h][i][j].num;
 		}
 	}
